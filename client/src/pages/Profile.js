@@ -7,6 +7,8 @@ import ExperienceProjects from "../components/ExperienceProjects";
 import axios from "axios";
 
 const { TabPane } = Tabs;
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+export const API_URL = `${BACKEND_URL}/`;
 
 function Profile() {
   const [loading, setLoading] = useState(false);
@@ -15,7 +17,7 @@ function Profile() {
   const onFinish = async (values) => {
     setLoading(true);
     try {
-      const result = await axios.post("api/user/update", {
+      const result = await axios.post(API_URL + "api/user/update", {
         ...values,
         _id: user._id,
       });

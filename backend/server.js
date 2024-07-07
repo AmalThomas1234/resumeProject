@@ -1,10 +1,22 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
+const cors = require("cors");
 const dbConnect = require("./dbConnect");
 app.use(express.json());
 const port = process.env.PORT || 5000;
 const userRoute = require("./routes/userRoute");
 const path = require("path");
+
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: true,
+    optionsSuccessStatus: 204,
+  })
+);
 
 app.use("/api/user/", userRoute);
 

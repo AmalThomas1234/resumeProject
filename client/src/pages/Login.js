@@ -4,13 +4,16 @@ import axios from "axios";
 import "../resources/authentication.css";
 import { Link, useNavigate } from "react-router-dom";
 
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+export const API_URL = `${BACKEND_URL}/`;
+
 function Login() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const onFinish = async (values) => {
     setLoading(true);
     try {
-      const user = await axios.post("api/user/login", values);
+      const user = await axios.post(API_URL + "api/user/login", values);
       setLoading(false);
       message.success("Login successfull");
       localStorage.setItem("amalresume-user", JSON.stringify(user.data));

@@ -4,13 +4,16 @@ import axios from "axios";
 import "../resources/authentication.css";
 import { Link, useNavigate } from "react-router-dom";
 
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+export const API_URL = `${BACKEND_URL}/`;
+
 function Register() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const onFinish = async (values) => {
     setLoading(true);
     try {
-      await axios.post("api/user/register", values);
+      await axios.post(API_URL + "api/user/register", values);
       setLoading(false);
       message.success("Registration successfull");
     } catch (error) {
